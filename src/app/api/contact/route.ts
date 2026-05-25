@@ -45,7 +45,7 @@ export async function POST(request: Request) {
       from: '"Imam Hasan" <hi@imamhasan.dev>',
       to: "hi@imamhasan.dev",
       replyTo: `"${name}" <${email}>`, // Directly reply to the visitor's entered email
-      subject: `New Portfolio Contact Message from ${name}`,
+      subject: `📬 NEW PORTFOLIO CONTACT: ${name}`,
       text: `You have received a new contact message from your portfolio site.
 
 Name: ${name}
