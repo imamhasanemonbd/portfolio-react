@@ -82,7 +82,9 @@ export default function Home() {
   const [formEmail, setFormEmail] = useState("");
   const [formMessage, setFormMessage] = useState("");
   const [formError, setFormError] = useState(false);
+  const [formErrorMsg, setFormErrorMsg] = useState("");
   const [formSuccess, setFormSuccess] = useState(false);
+  const [formSending, setFormSending] = useState(false);
 
   // Custom cursor state
   const [cursorX, setCursorX] = useState(-100);
@@ -378,24 +380,55 @@ export default function Home() {
 
 
   // Form Submit Handler
-  const handleContactSubmit = (e: React.FormEvent) => {
+  const handleContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formName || !formEmail || !formMessage) {
       setFormError(true);
+      setFormErrorMsg("Please fill in all details!");
       setFormSuccess(false);
       return;
     }
 
+    setFormSending(true);
     setFormError(false);
-    setFormSuccess(true);
-    setFormName("");
-    setFormEmail("");
-    setFormMessage("");
+    setFormErrorMsg("");
+    setFormSuccess(false);
 
-    // Fade success message after 4s
-    setTimeout(() => {
-      setFormSuccess(false);
-    }, 4000);
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formName,
+          email: formEmail,
+          message: formMessage,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to send email");
+      }
+
+      setFormSuccess(true);
+      setFormName("");
+      setFormEmail("");
+      setFormMessage("");
+
+      // Fade success message after 4s
+      setTimeout(() => {
+        setFormSuccess(false);
+      }, 4000);
+    } catch (err: any) {
+      console.error(err);
+      setFormError(true);
+      setFormErrorMsg(err.message || "Something went wrong, please try again!");
+    } finally {
+      setFormSending(false);
+    }
   };
 
   // Filtered portfolio list
@@ -978,7 +1011,7 @@ export default function Home() {
               <form className="contact_form" onSubmit={handleContactSubmit}>
                 {formError && (
                   <div className="empty_notice" style={{ display: "block" }}>
-                    <span>Please fill in all details!</span>
+                    <span>{formErrorMsg || "Please fill in all details!"}</span>
                   </div>
                 )}
                 {formSuccess && (
@@ -992,6 +1025,7 @@ export default function Home() {
                       type="text" 
                       placeholder="Your Name" 
                       value={formName}
+                      disabled={formSending}
                       onChange={(e) => setFormName(e.target.value)}
                       onMouseEnter={() => setCursorHover(true)}
                       onMouseLeave={() => setCursorHover(false)}
@@ -1002,6 +1036,7 @@ export default function Home() {
                       type="text" 
                       placeholder="Your Email" 
                       value={formEmail}
+                      disabled={formSending}
                       onChange={(e) => setFormEmail(e.target.value)}
                       onMouseEnter={() => setCursorHover(true)}
                       onMouseLeave={() => setCursorHover(false)}
@@ -1011,6 +1046,7 @@ export default function Home() {
                     <textarea 
                       placeholder="Your Message" 
                       value={formMessage}
+                      disabled={formSending}
                       onChange={(e) => setFormMessage(e.target.value)}
                       onMouseEnter={() => setCursorHover(true)}
                       onMouseLeave={() => setCursorHover(false)}
@@ -1020,10 +1056,11 @@ export default function Home() {
                 <div className="hasan_tm_button">
                   <button 
                     type="submit" 
+                    disabled={formSending}
                     onMouseEnter={() => setCursorHover(true)}
                     onMouseLeave={() => setCursorHover(false)}
                   >
-                    Send Message
+                    {formSending ? "Sending..." : "Send Message"}
                   </button>
                 </div>
               </form>
