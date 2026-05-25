@@ -70,8 +70,63 @@ ${message}
       `,
     };
 
-    // 4. Dispatch Email
+    // 4. Dispatch Email to Portfolio Owner
     await transporter.sendMail(mailOptions);
+
+    // 5. Dispatch Auto-Reply Email to the Visitor (Matching visual design of the website)
+    const autoReplyOptions = {
+      from: process.env.SMTP_FROM || "hi@imamhasan.dev",
+      to: email, // The user's input email
+      subject: `Thank you for reaching out! — Imam Hasan`,
+      text: `Hi ${name},
+
+Thank you for getting in touch! I have successfully received your message and will review it shortly. I will get back to you as soon as possible.
+
+Best regards,
+Imam Hasan
+Creative Web & App Developer
+hi@imamhasan.dev
+https://imamhasan.dev
+`,
+      html: `
+        <div style="background-color: #070708; color: #ffffff; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; max-width: 600px; border: 1px solid #333333; border-radius: 12px; padding: 40px; margin: 0 auto; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+          <div align="center" style="margin-bottom: 30px;">
+            <h1 style="font-size: 2.2rem; font-weight: 300; letter-spacing: 2px; margin: 0; color: #ffffff;">
+              <span style="border: 2px solid #ffffff; padding: 5px 15px; display: inline-block;">Imam Hasan</span>
+            </h1>
+            <p style="color: #777777; font-size: 0.9rem; margin-top: 10px; text-transform: uppercase; letter-spacing: 3px;">Creative Web & App Developer</p>
+          </div>
+          
+          <div style="border-top: 1px solid #222222; border-bottom: 1px solid #222222; padding: 30px 0; margin-bottom: 30px;">
+            <p style="font-size: 1.1rem; line-height: 1.8; font-weight: 300; margin-top: 0; color: #dddddd;">Hi ${name},</p>
+            <p style="font-size: 1.1rem; line-height: 1.8; font-weight: 300; color: #bbbbbb;">
+              Thank you for reaching out! I have successfully received your message and will review it shortly.
+            </p>
+            <p style="font-size: 1.1rem; line-height: 1.8; font-weight: 300; color: #bbbbbb; margin-bottom: 0;">
+              By blending modern technology with a devotion to absolute visual aesthetics, I aim to craft premium digital experiences. I will get back to you personally as soon as possible to discuss how we can bring your ideas to life.
+            </p>
+          </div>
+          
+          <div align="center">
+            <a href="https://imamhasan.dev" style="background-color: #ffffff; color: #000000; text-decoration: none; padding: 12px 30px; font-weight: 600; font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; border-radius: 4px; display: inline-block;">
+              Visit Website
+            </a>
+          </div>
+          
+          <div style="margin-top: 40px; text-align: center; font-size: 0.8rem; color: #555555; border-top: 1px solid #111111; padding-top: 20px;">
+            <p style="margin: 0 0 5px 0;">Copyright &copy; 2026 Imam Hasan Emon | All Rights Reserved</p>
+            <p style="margin: 0;">You received this automated email because you submitted a contact form on <a href="https://imamhasan.dev" style="color: #ffffff; text-decoration: underline;">imamhasan.dev</a>.</p>
+          </div>
+        </div>
+      `,
+    };
+
+    try {
+      await transporter.sendMail(autoReplyOptions);
+    } catch (autoReplyError) {
+      // Log auto-reply error but don't fail the contact submission
+      console.error("Auto-Reply Mailer Error:", autoReplyError);
+    }
 
     return NextResponse.json({ success: true, message: "Email sent successfully." });
   } catch (error: any) {
