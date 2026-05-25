@@ -42,7 +42,7 @@ export async function POST(request: Request) {
 
     // 3. Email Package
     const mailOptions = {
-      from: process.env.SMTP_FROM || "hi@imamhasan.dev",
+      from: '"Imam Hasan" <hi@imamhasan.dev>',
       to: "hi@imamhasan.dev",
       replyTo: email, // Directly reply to the user's input email
       subject: `New Portfolio Contact Message from ${name}`,
@@ -95,7 +95,7 @@ ${message}
 
     // 5. Dispatch Auto-Reply Email to the Visitor (Matching visual design of the website)
     const autoReplyOptions = {
-      from: process.env.SMTP_FROM || "hi@imamhasan.dev",
+      from: '"Imam Hasan" <hi@imamhasan.dev>',
       to: email, // The user's input email
       subject: `Thank you for reaching out! — Imam Hasan`,
       text: `Hi ${name},
