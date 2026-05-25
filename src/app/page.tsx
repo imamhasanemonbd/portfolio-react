@@ -43,6 +43,14 @@ const getTechIcon = (tool: string) => {
           <path d="M3 5v6c0 1.66 4 3 9 3s9-1.34 9-3V5M3 11v6c0 1.66 4 3 9 3s9-1.34 9-3v-6" />
         </svg>
       );
+    case "prisma":
+      return (
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ display: "block" }}>
+          <path d="M12 3L2 19h20L12 3z" />
+          <path d="M12 3v16" />
+          <path d="M2 19l10-6 10 6" />
+        </svg>
+      );
     default:
       return null;
   }
@@ -156,6 +164,19 @@ export default function Home() {
       tools: ["react", "typescript", "mysql"],
       description: "Company Portfolio",
       longDescription: "Al Baraka Group is an enterprise-grade corporate platform designed to convey prestige, multi-sector presence, and investment growth. It aggregates details of construction portfolios, investment operations, and global trade volumes. The frontend is powered by React and styled to perfection, utilizing TypeScript for modular code robustness and MySQL for managing structured asset catalogs and dynamic global updates."
+    },
+    {
+      id: "p4",
+      title: "Royal Plaza Hotel",
+      category: "detail",
+      image: "img/royalplaza.png",
+      client: "Royal Plaza Hotel",
+      date: "May 20, 2026",
+      techStack: "React, TypeScript, MySQL, Prisma",
+      liveUrl: "https://royalplazahotel.com",
+      tools: ["react", "typescript", "mysql", "prisma"],
+      description: "3star hotel",
+      longDescription: "Royal Plaza Hotel is an ultra-modern booking and hospitality management web application engineered for a premium 3-star luxury resort. Leveraging React for dynamic client-side scheduling and real-time room availability, TypeScript for type-safe business logic, and MySQL managed through Prisma ORM for highly structured, ultra-fast guest registration and payment processing databases. The platform delivers an exceptional reservation experience with fluid animations and responsive layout design."
     }
   ];
 
