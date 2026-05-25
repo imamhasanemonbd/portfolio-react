@@ -27,7 +27,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const transporter = nodemailer.createTransport({
+    let transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST || "smtp.zoho.com",
       port: parseInt(process.env.SMTP_PORT || "465"),
       secure: true, // use SSL/TLS
@@ -70,8 +70,28 @@ ${message}
       `,
     };
 
-    // 4. Dispatch Email to Portfolio Owner
-    await transporter.sendMail(mailOptions);
+    // 4. Dispatch Email to Portfolio Owner (With automatic STARTTLS fallback if SSL on port 465 is blocked by server host)
+    try {
+      await transporter.sendMail(mailOptions);
+    } catch (primaryError: any) {
+      console.warn("Primary SMTP Port 465 failed, trying fallback Port 587 (STARTTLS)...", primaryError);
+      
+      const fallbackTransporter = nodemailer.createTransport({
+        host: "smtp.zoho.com",
+        port: 587,
+        secure: false, // false for port 587 (uses STARTTLS)
+        auth: {
+          user,
+          pass,
+        },
+        connectionTimeout: 10000,
+        greetingTimeout: 10000,
+      });
+
+      await fallbackTransporter.sendMail(mailOptions);
+      // Re-assign successful transport so autoReply uses it too
+      transporter = fallbackTransporter;
+    }
 
     // 5. Dispatch Auto-Reply Email to the Visitor (Matching visual design of the website)
     const autoReplyOptions = {
