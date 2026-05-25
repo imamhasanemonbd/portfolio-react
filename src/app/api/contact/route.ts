@@ -44,7 +44,7 @@ export async function POST(request: Request) {
     const mailOptions = {
       from: '"Imam Hasan" <hi@imamhasan.dev>',
       to: "hi@imamhasan.dev",
-      replyTo: email, // Directly reply to the user's input email
+      replyTo: `"${name}" <${email}>`, // Directly reply to the visitor's entered email
       subject: `New Portfolio Contact Message from ${name}`,
       text: `You have received a new contact message from your portfolio site.
 
