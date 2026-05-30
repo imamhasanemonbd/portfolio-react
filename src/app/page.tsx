@@ -179,6 +179,19 @@ export default function Home() {
       tools: ["react", "typescript", "mysql", "prisma"],
       description: "3star hotel",
       longDescription: "Royal Plaza Hotel is an ultra-modern booking and hospitality management web application engineered for a premium 3-star luxury resort. Leveraging React for dynamic client-side scheduling and real-time room availability, TypeScript for type-safe business logic, and MySQL managed through Prisma ORM for highly structured, ultra-fast guest registration and payment processing databases. The platform delivers an exceptional reservation experience with fluid animations and responsive layout design."
+    },
+    {
+      id: "p5",
+      title: "BioLink BD",
+      category: "detail",
+      image: "img/biolink.png",
+      client: "BioLink BD",
+      date: "May 28, 2026",
+      techStack: "Next.js, TypeScript, MySQL, Prisma, TailwindCSS",
+      liveUrl: "https://biolink.bd",
+      tools: ["react", "typescript", "mysql", "prisma"],
+      description: "Bio Link Platform",
+      longDescription: "BioLink BD is a state-of-the-art bio-link directory and social link aggregation platform engineered to connect creators and businesses with their audiences. Built on top of Next.js and styled with TailwindCSS, it integrates strict TypeScript contracts, a MySQL database pipeline managed via Prisma, and features an interactive drag-and-drop builder powered by @dnd-kit. The platform delivers fluid Framer Motion animations, passwordless passkey login integrations (WebAuthn), and secure authenticator-based 2FA systems, all tied to instant redirect metrics."
     }
   ];
 

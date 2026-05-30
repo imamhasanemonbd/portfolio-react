@@ -33,22 +33,28 @@
 
 This repository hosts a curated collection of active, production-grade applications that demonstrate full-stack engineering expertise:
 
-### 🏨 1. Royal Plaza Hotel — *3-Star Booking Web Application*
+### 🔗 1. BioLink BD — *Premium Bio-Link & Social Aggregator*
+*   **Stack**: Next.js, TypeScript, MySQL, Prisma ORM, TailwindCSS, Framer Motion, dnd-kit, WebAuthn (Passkeys)
+*   **Details**: A state-of-the-art bio-link directory and social aggregation platform. Features an interactive drag-and-drop link builder block, passwordless passkey login integrations (WebAuthn), Speakeasy-based 2FA systems, and a real-time click analytics dashboard.
+*   **Asset Preview**: `public/img/biolink.png`
+*   **Live Link**: [biolink.bd](https://biolink.bd)
+
+### 🏨 2. Royal Plaza Hotel — *3-Star Booking Web Application*
 *   **Stack**: React, TypeScript, MySQL, Prisma ORM
 *   **Details**: An ultra-modern guest reservation and scheduling portal designed for a luxury resort. Includes real-time room availability, Prisma schema optimizations, fluid page transition scripts, and fully-secured guest check-in workflows.
 *   **Asset Preview**: `public/img/royalplaza.png`
 
-### 🚀 2. VPS Rocket — *Web Hosting Infrastructure Client Portal*
+### 🚀 3. VPS Rocket — *Web Hosting Infrastructure Client Portal*
 *   **Stack**: React, TypeScript, MySQL
 *   **Details**: A client-centric web hosting utility dashboard. Features real-time VPS cloud deployment provisioning, cloud resource customization sliders, secure client billing processing, and interactive resource analytics.
 *   **Asset Preview**: `public/img/vpsrocket.png`
 
-### 🛠️ 3. Sav Technologies — *Top-Tier Digital Product Showcase*
+### 🛠️ 4. Sav Technologies — *Top-Tier Digital Product Showcase*
 *   **Stack**: React, TypeScript, MySQL
 *   **Details**: A sophisticated business website built using reusable component structures, type-safe logic, and dynamic card animations to showcase enterprise software integrations.
 *   **Asset Preview**: `public/img/sav.png`
 
-### 🧱 4. Al Baraka Group — *Corporate Multipurpose Platform*
+### 🧱 5. Al Baraka Group — *Corporate Multipurpose Platform*
 *   **Stack**: React, TypeScript, MySQL
 *   **Details**: An enterprise corporate system detailing construction portfolios, global trade aggregate structures, and multi-sector investment profiles.
 *   **Asset Preview**: `public/img/al-baraka.png`
